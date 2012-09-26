@@ -5,9 +5,13 @@
     "scripts":{
         "start":"node app"
     },
-    "dependencies":{},
+    "dependencies":{
+        "express":"latest",
+        "mongojs":"latest"
+    },
     "devDependencies":{
         "cucumber":"latest",
-        "zombie":"latest"
+        "zombie":"latest",
+        "request":"latest",
     }
 }

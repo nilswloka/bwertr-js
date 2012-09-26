@@ -10,6 +10,6 @@ Feature: Show number of ratings
     Then I can see that there are 0 ratings.
 
   Scenario: Some ratings
-    Given there are 0 ratings
+    Given there are 5 ratings
     When I visit the application
     Then I can see that there are 5 ratings.
