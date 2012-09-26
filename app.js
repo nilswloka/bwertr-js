@@ -2,11 +2,13 @@ var express = require('express'),
     databaseUrl = 'localhost:27017/bwertr',
     db = require('mongojs').connect(databaseUrl),
     ratings = db.collection('ratings'),
-    app = express();
+    app = express(),
+    path = require('path');
 
 app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.logger('dev'));
+    app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function () {
