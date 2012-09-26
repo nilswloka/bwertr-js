@@ -3,9 +3,6 @@ node_js:
   - 0.8
 services:
   - mongodb
-install:
-  - npm install --dev
-  - npm install
 script:
   - npm run-script yeoman-test
   - npm run-script yeoman-build
