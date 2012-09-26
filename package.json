@@ -3,7 +3,10 @@
     "version":"0.0.1",
     "private":true,
     "scripts":{
-        "start":"node app"
+        "start":"node app",
+        "test":"node_modules/.bin/cucumber.js",
+        "yeoman-test":"cd bwertr-client; ../node_modules/.bin/yeoman test; cd ..",
+        "yeoman-build":"cd bwertr-client; ../node_modules/.bin/yeoman build; cd .."
     },
     "dependencies":{
         "express":"latest",
@@ -13,6 +16,7 @@
     "devDependencies":{
         "cucumber":"latest",
         "request":"latest",
-        "node-phantom":"latest"
+        "node-phantom":"latest",
+        "yeoman":"latest"
     }
 }
