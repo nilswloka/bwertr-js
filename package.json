@@ -12,7 +12,7 @@
     },
     "devDependencies":{
         "cucumber":"latest",
-        "zombie":"latest",
-        "request":"latest"
+        "request":"latest",
+        "node-phantom":"latest"
     }
 }

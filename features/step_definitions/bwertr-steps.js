@@ -1,9 +1,7 @@
 var bwertrSteps = function bwertrSteps() {
     'use strict';
 
-    var request = require('request'),
-        zombie = require('zombie'),
-        browser = new zombie.Browser({ silent: true });
+    var request = require('request');
 
     this.Given(/^there are (\d+) ratings$/, function (numberOfRatings, callback) {
         request({
@@ -34,24 +32,30 @@ var bwertrSteps = function bwertrSteps() {
     });
 
     this.When(/^I visit the application$/, function (callback) {
-        // Visit bwertr
-        browser.visit('http://localhost:3000', function () {
-            if (browser.text('title') == 'Welcome to bwertr!') {
-                callback();
-            } else {
-                callback.fail(new Error('Not on welcome page.'));
-            }
+        var self = this;
+        self.page.open('http://localhost:3000', function () {
+            self.page.evaluate(function () {
+                return document.title;
+            }, function (err, title) {
+                if (title == 'Welcome to bwertr!') {
+                    callback();
+                } else {
+                    callback.fail(new Error('Not on welcome page (title: ' + title + ')'));
+                }
+            });
         });
     });
 
     this.Then(/^I can see that there are (\d+) ratings\.$/, function (expectedNumberOfRatings, callback) {
-        // Compare number of ratings shown
-        var numberOfRatings = browser.text('#numberOfRatings');
-        if (numberOfRatings == expectedNumberOfRatings) {
-            callback();
-        } else {
-            callback.fail(new Error('Expected ' + expectedNumberOfRatings + ', found ' + numberOfRatings));
-        }
+        this.page.evaluate(function () {
+            return document.getElementById('numberOfRatings').innerText;
+        }, function (err, numberOfRatings) {
+            if (numberOfRatings == expectedNumberOfRatings) {
+                callback();
+            } else {
+                callback.fail(new Error('Expected ' + expectedNumberOfRatings + ', found ' + numberOfRatings));
+            }
+        });
     });
 
 };
