@@ -1,9 +1,16 @@
 var express = require('express'),
+    http = require('http'),
+    path = require('path'),
+    mongojs = require('mongojs'),
+    socketio = require('socket.io'),
     databaseUrl = 'localhost:27017/bwertr',
-    db = require('mongojs').connect(databaseUrl),
+    db = mongojs.connect(databaseUrl),
     ratings = db.collection('ratings'),
     app = express(),
-    path = require('path');
+    server = http.createServer(app),
+    io = socketio.listen(server);
+
+server.listen(3000);
 
 app.configure(function () {
     app.use(express.bodyParser());
@@ -16,15 +23,27 @@ app.configure('development', function () {
 });
 
 app.del('/ratings', function (request, response) {
-    ratings.remove();
+    ratings.remove(function () {
+        ratings.find(function (err, data) {
+            io.sockets.emit('numberOfRatingsChanged', { numberOfRatings: data.length });
+        });
+    });
     response.send(200, { message: "Reset successful." });
 });
 
 app.post('/ratings', function (request, response) {
     ratings.save(request.body, function () {
+        ratings.find(function (err, data) {
+            io.sockets.emit('numberOfRatingsChanged', { numberOfRatings: data.length });
+        });
         response.send(200, request.body);
     });
 });
 
-app.listen(3000);
+io.sockets.on('connection', function (socket) {
+    ratings.find(function (err, data) {
+        io.sockets.emit('numberOfRatingsChanged', { numberOfRatings: data.length });
+    });
+});
+
 console.log('Listening on port 3000');

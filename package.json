@@ -7,11 +7,12 @@
     },
     "dependencies":{
         "express":"latest",
-        "mongojs":"latest"
+        "mongojs":"latest",
+        "socket.io":"latest"
     },
     "devDependencies":{
         "cucumber":"latest",
         "zombie":"latest",
-        "request":"latest",
+        "request":"latest"
     }
 }
