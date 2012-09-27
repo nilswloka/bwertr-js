@@ -37,7 +37,9 @@ var bwertrSteps = function bwertrSteps() {
             self.page.evaluate(function () {
                 return document.title;
             }, function (err, title) {
-                if (title == 'Welcome to bwertr!') {
+                if (err) {
+                    callback.fail(new Error(err));
+                } else if (title == 'Welcome to bwertr!') {
                     callback();
                 } else {
                     callback.fail(new Error('Not on welcome page (title: ' + title + ')'));
@@ -50,7 +52,9 @@ var bwertrSteps = function bwertrSteps() {
         this.page.evaluate(function () {
             return document.getElementById('numberOfRatings').innerText;
         }, function (err, numberOfRatings) {
-            if (numberOfRatings == expectedNumberOfRatings) {
+            if (err) {
+                callback.fail(new Error(err));
+            } else if (numberOfRatings == expectedNumberOfRatings) {
                 callback();
             } else {
                 callback.fail(new Error('Expected ' + expectedNumberOfRatings + ', found ' + numberOfRatings));
