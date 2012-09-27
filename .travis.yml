@@ -5,6 +5,9 @@ services:
   - mongodb
 env:
   - yeoman_test=true
+install:
+  - npm install
+  - gem install compass
 before_script:
   - node app &
   - sleep 5
