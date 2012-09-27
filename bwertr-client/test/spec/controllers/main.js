@@ -1,22 +1,26 @@
 'use strict';
 
-describe('Controller: MainCtrl', function() {
+describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('bwertrClientApp'));
+    var MainCtrl, Socket, scope;
 
-  var MainCtrl,
-    scope;
+    beforeEach(function () {
+        module('bwertrClientApp', function ($provide) {
+            Socket = {
+                on: jasmine.createSpy()
+            };
+            $provide.value('Socket', Socket);
+        });
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller) {
-    scope = {};
-    MainCtrl = $controller('MainCtrl', {
-      $scope: scope
+        inject(function ($controller) {
+            scope = {};
+            MainCtrl = $controller('MainCtrl', {
+                $scope: scope
+            });
+        });
     });
-  }));
 
-  xit('should attach a list of awesomeThings to the scope', function() {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
+    it('should register a listener with Socket service', function () {
+        expect(Socket.on).toHaveBeenCalledWith('numberOfRatingsChanged', jasmine.any(Function) );
+    });
 });

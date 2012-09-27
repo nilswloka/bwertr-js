@@ -7,6 +7,7 @@ env:
   - yeoman_test=true
 install:
   - npm install
+  - npm install -g testacular@canary
   - gem install compass
 before_script:
   - node app &
