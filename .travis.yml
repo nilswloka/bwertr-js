@@ -5,7 +5,9 @@ services:
   - mongodb
 env:
   - yeoman_test=true
+before_script:
+  - node app
 script:
   - npm run-script yeoman-test
-  - true npm run-script yeoman-build
+  - npm run-script yeoman-build
   - npm test
