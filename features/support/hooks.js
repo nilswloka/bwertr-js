@@ -12,10 +12,12 @@ var bwertrHooks = function () {
         });
     });
 
-    this.After(function (callback) {
+   /*
+   this.After(function (callback) {
         this.phantom.exit();
         callback();
     });
+    */
 };
 
 module.exports = bwertrHooks;
