@@ -7,6 +7,7 @@ env:
   - yeoman_test=true
 before_script:
   - node app &
+  - sleep 5
 script:
   - npm run-script yeoman-test
   - npm run-script yeoman-build
