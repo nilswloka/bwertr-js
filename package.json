@@ -16,7 +16,6 @@
     "devDependencies":{
         "cucumber":"latest",
         "request":"latest",
-        "node-phantom":"latest",
         "yeoman":"latest"
     }
 }

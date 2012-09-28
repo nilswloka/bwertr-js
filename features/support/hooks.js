@@ -1,20 +1,22 @@
 var bwertrHooks = function () {
-    var phantom = require('node-phantom');
+    var webdriver = require('../../lib/webdriver');
 
     this.Before(function (callback) {
-        self = this;
-        phantom.create(function (err, ph) {
-            self.phantom = ph;
-            ph.createPage(function (err, page) {
-                self.page = page;
-                callback();
-            })
-        });
+        this.webdriver = webdriver;
+        this.driver = new webdriver.Builder().
+            usingServer('http://localhost:4444/wd/hub').
+            withCapabilities({
+                'browserName': 'firefox',
+                'javascriptEnabled': 'true'
+            }).
+            build();
+        callback();
     });
 
     this.After(function (callback) {
-        this.phantom.exit();
-        callback();
+        this.driver.quit().then(function () {
+            callback();
+        });
     });
 };
 
