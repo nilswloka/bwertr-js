@@ -14,10 +14,23 @@ bwertrClientApp.factory('Socket', ['$rootScope', function ($rootScope) {
     };
 }]);
 
-bwertrClientApp.controller('MainCtrl', ['$scope', 'Socket', function ($scope, Socket) {
+bwertrClientApp.factory('Ratings', ['$http', function ($http) {
+    return {
+        add: function (rating) {
+            $http.post('http://localhost:3000/ratings', {rating: rating});
+        }
+    };
+}]);
+
+bwertrClientApp.controller('MainCtrl', ['$scope', '$location', 'Socket', 'Ratings', function ($scope, $location, Socket, Ratings) {
     Socket.on('numberOfRatingsChanged', function (data) {
         $scope.numberOfRatings = data.numberOfRatings;
     });
 
     $scope.possibleRatings = ['Poor', 'Average', 'Excellent'];
+
+    $scope.rate = function (rating) {
+        Ratings.add(rating);
+        $location.path('/thankYou/' + rating);
+    };
 }]);

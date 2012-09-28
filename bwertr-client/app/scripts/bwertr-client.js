@@ -7,6 +7,10 @@ var bwertrClientApp = angular.module('bwertrClientApp', [])
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
         })
+        .when('/thankYou/:givenRating', {
+            templateUrl: 'views/thankYou.html',
+            controller: 'ResultsCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
