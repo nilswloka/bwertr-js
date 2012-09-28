@@ -23,4 +23,8 @@ describe('Controller: MainCtrl', function () {
     it('should register a listener with Socket service', function () {
         expect(Socket.on).toHaveBeenCalledWith('numberOfRatingsChanged', jasmine.any(Function) );
     });
+
+    it('should add possible ratings to scope', function () {
+        expect(scope.possibleRatings).toEqual(['Poor', 'Average', 'Excellent']);
+    })
 });

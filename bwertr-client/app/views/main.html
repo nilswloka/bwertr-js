@@ -1,4 +1,10 @@
 <div class="hero-unit">
     <h1>Welcome to bwertr!</h1>
     <p>This presentation has already been rated <span id="numberOfRatings">{{numberOfRatings}}</span> times.</p>
+    <p>
+        <label for="rating">Please choose:</label>
+        <select id="rating" name="rating" ng-model="givenRating" ng-options="rating for rating in possibleRatings">
+        </select>
+    </p>
+    <p>You have rated this presentation with <span id="givenRating">{{givenRating}}</span>.</p>
 </div>

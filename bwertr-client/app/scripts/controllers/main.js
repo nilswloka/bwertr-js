@@ -18,4 +18,6 @@ bwertrClientApp.controller('MainCtrl', ['$scope', 'Socket', function ($scope, So
     Socket.on('numberOfRatingsChanged', function (data) {
         $scope.numberOfRatings = data.numberOfRatings;
     });
+
+    $scope.possibleRatings = ['Poor', 'Average', 'Excellent'];
 }]);
