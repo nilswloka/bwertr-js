@@ -32,5 +32,6 @@ bwertrClientApp.controller('MainCtrl', ['$scope', '$location', 'Socket', 'Rating
     $scope.rate = function (rating) {
         Ratings.add(rating);
         $location.path('/thankYou/' + rating);
+        $location.replace();
     };
 }]);

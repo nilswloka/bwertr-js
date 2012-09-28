@@ -6,9 +6,12 @@ var BwertrDriver = function BwertrDriver() {
         usingServer('http://localhost:4444/wd/hub').
         withCapabilities({
             'browserName': 'firefox',
-            'javascriptEnabled': 'true'
+            'javascriptEnabled': 'true',
+            'locationContextEnabled': 'true'
         }).
         build();
+
+    this.driver.manage().timeouts().implicitlyWait(50);
 
     this.visitBwertr = function () {
         return this.driver.get('http://localhost:3000/');
