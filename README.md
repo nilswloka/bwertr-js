@@ -23,7 +23,7 @@ Inside the project directory, do the following to test, build and run the applic
 * `npm yeoman-test && npm yeoman-build` to test and build the bwertr client
 * `npm test` to run the end-to-end tests
 
-You can have a look at the application at http://localhost:3000.
+You can have a look at the application at [http://localhost:3000](http://localhost:3000).
 
 The bwertr-js kata
 ==================
